@@ -14,11 +14,11 @@ fn main() {
 
             let instant_bytes: [u8; mem::size_of::<Instant>()] = mem::transmute(instant2);
             let ptr = instant_bytes.as_ptr();
-            let tv_sec_ptr = ptr as *const u64;
+            let tv_sec_ptr = ptr as *const u64; // extracting tv_sec from RDTSC return 
 
             if hit == false{
                 hit = true;
-                time_in_future = *tv_sec_ptr + 20; // previous captured RDTSC + 20 (seconds)
+                time_in_future = *tv_sec_ptr + 20; // previous captured RDTSC (tv_sec) + 20 (seconds)
             }
 
             println!("Instant: {:?} - expected: {:?}", *tv_sec_ptr, time_in_future);
